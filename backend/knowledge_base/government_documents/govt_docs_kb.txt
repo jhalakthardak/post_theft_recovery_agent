@@ -1,0 +1,5 @@
+GOVERNMENT IDENTITY DOCUMENT RECOVERY:
+1. Aadhaar Card: Download digital e-Aadhaar from myAadhaar portal (myaadhaar.uidai.gov.in) using registered mobile OTP or order an official PVC reprint card.
+2. PAN Card: Submit an application for duplicate PAN reprint on the Protean (NSDL) or UTITSL official portal.
+3. Driving Licence: File an online application on Parivahan Sewa (parivahan.gov.in) for duplicate Driving Licence issuance and upload a police loss report copy.
+4. Voter ID: Apply for replacement Electoral Photo Identity Card (EPIC) on the official Election Commission of India portal (voters.eci.gov.in).

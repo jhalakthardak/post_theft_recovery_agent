@@ -1,0 +1,4 @@
+DIGILOCKER DIGITAL DOCUMENT ACCESS:
+1. DigiLocker (digilocker.gov.in) provides legally valid digital access to official government documents including Driving Licence, Aadhaar, PAN, and RC under Rule 9A of IT Rules 2016.
+2. Authenticate using official government credentials directly on the official portal.
+3. SmartRecover AI strictly routes users to official government portals and never collects or stores user login passwords or OTPs.

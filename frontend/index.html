@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic AI Post-Theft Recovery System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SmartRecover AI</h1>
+      <p>Agentic Post-Theft Recovery, Case Tracking & Emergency Police Dispatch Hub</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('report-tab')">Report Incident</button>
+      <button class="tab-btn" onclick="switchTab('tracker-tab')">Track Case ID</button>
+      <button class="tab-btn" onclick="switchTab('police-tab')">Nearby Police Stations & Dispatch</button>
+      <button class="tab-btn" onclick="switchTab('contacts-tab')">Emergency Helplines</button>
+      <button class="tab-btn" onclick="switchTab('digilocker-tab')">DigiLocker & Official Portals</button>
+    </div>
+
+    <!-- TAB 1: INCIDENT REPORT FORM -->
+    <div id="report-tab" class="tab-content">
+      <div id="form-card" class="card">
+        <h2>Report Theft Incident</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Submit details to run automated AI agent risk evaluation and generate an instant recovery plan.</p>
+
+        <form id="theft-form">
+          <div class="form-group">
+            <label for="user_name">Full Name</label>
+            <input type="text" id="user_name" required placeholder="e.g. John Doe">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="form-group">
+              <label for="incident_location">Incident Location</label>
+              <input type="text" id="incident_location" required placeholder="e.g. Connaught Place, New Delhi">
+            </div>
+            <div class="form-group">
+              <label for="incident_date">Incident Date</label>
+              <input type="date" id="incident_date" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="theft_type">What Was Lost / Stolen?</label>
+            <select id="theft_type">
+              <option value="both">Both Wallet & Mobile Phone</option>
+              <option value="wallet">Wallet Only</option>
+              <option value="mobile">Mobile Phone Only</option>
+            </select>
+          </div>
+
+          <div id="wallet-section" class="form-group">
+            <label>Lost Documents & Financial Cards</label>
+            <div class="checkbox-grid">
+              <label class="checkbox-item"><input type="checkbox" id="has_aadhaar"> Aadhaar Card</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_pan"> PAN Card</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_dl"> Driving Licence</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_voter"> Voter ID</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_debit"> Debit Card</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_credit"> Credit Card</label>
+            </div>
+          </div>
+
+          <div id="mobile-section" class="form-group">
+            <label>Stolen Mobile Device Details</label>
+            <div style="margin-bottom: 12px;">
+              <label for="device_type" style="font-size: 0.9rem;">Device OS</label>
+              <select id="device_type">
+                <option value="Android">Android Device</option>
+                <option value="iPhone">Apple iPhone (iOS)</option>
+              </select>
+            </div>
+            <div class="checkbox-grid">
+              <label class="checkbox-item"><input type="checkbox" id="sim_present" checked> SIM Active Inside</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_banking_apps" checked> Banking Apps Installed</label>
+              <label class="checkbox-item"><input type="checkbox" id="has_upi" checked> Active UPI Linked</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Additional Notes / Incident Description</label>
+            <textarea id="description" rows="3" placeholder="Provide extra details (bus/train details, IMEI numbers, suspicious activity)..."></textarea>
+          </div>
+
+          <button type="submit" class="btn">Run Agentic AI Recovery Assessment</button>
+        </form>
+      </div>
+
+      <!-- Generated Case Results View -->
+      <div id="result-card" class="card hidden">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h2>AI Recovery Plan Generated</h2>
+          <span style="font-family: monospace; font-size: 1.1rem; color: var(--primary-brown); font-weight: 700;" id="case-id-display">CASE-ID</span>
+        </div>
+
+        <div class="form-group">
+          <label>Automated Multi-Agent Risk Assessment</label>
+          <div id="risk-badges" style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px;"></div>
+        </div>
+
+        <div class="form-group" style="margin-top: 24px;">
+          <label>Prioritized Action Plan & Recovery Checklist</label>
+          <div id="checklist-container" style="margin-top: 10px;"></div>
+        </div>
+
+        <div class="form-group" style="margin-top: 24px;">
+          <label>Personalized Police Complaint Draft</label>
+          <pre id="complaint-draft-text">Generating complaint draft...</pre>
+          <div style="display: flex; gap: 10px; margin-top: 12px;">
+            <button onclick="copyDraftText()" class="chip-btn gold" style="font-size: 0.95rem; padding: 10px 18px; cursor: pointer;">📋 Copy Draft Text</button>
+            <button onclick="switchTab('police-tab'); autofillStationFromCase();" class="chip-btn red" style="font-size: 0.95rem; padding: 10px 18px; cursor: pointer;">🚨 Send to Nearby Police Station</button>
+          </div>
+        </div>
+
+        <button onclick="window.location.reload()" class="btn" style="background-color: var(--text-muted); margin-top: 15px;">File Another Incident Report</button>
+      </div>
+    </div>
+
+    <!-- TAB 2: CASE TRACKER -->
+    <div id="tracker-tab" class="tab-content hidden">
+      <div class="card">
+        <h2>Live Recovery Case Tracker</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Enter your generated Case ID to retrieve past risk assessments, police drafts, and task checklist status.</p>
+
+        <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+          <input type="text" id="lookup_case_id" placeholder="e.g. CASE-A1B2C3" style="text-transform: uppercase;">
+          <button onclick="trackCaseById()" class="btn" style="width: auto; padding: 0 25px;">Track Case</button>
+        </div>
+
+        <div id="tracker-results" class="hidden">
+          <div style="background: #fdfbf7; border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+            <h3 style="color: var(--primary-brown); margin-bottom: 8px;" id="tracked-case-header">Case Record Details</h3>
+            <p style="font-size: 0.95rem;"><strong>Status:</strong> <span id="tracked-status" style="color: var(--low-green); font-weight: 700;">ACTIVE</span></p>
+            <p style="font-size: 0.95rem;"><strong>Created On:</strong> <span id="tracked-date">-</span></p>
+            <div id="tracked-risk-badges" style="display: flex; gap: 10px; margin-top: 10px;"></div>
+          </div>
+
+          <h3 style="color: var(--primary-brown); margin-bottom: 10px;">Case Checklist Progress</h3>
+          <div id="tracked-checklist-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: NEARBY POLICE STATIONS & DISPATCH -->
+    <div id="police-tab" class="tab-content hidden">
+      <div class="card">
+        <h2>Nearby Police Station Routing & Draft Dispatch</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Locate jurisdictional police stations by area, view helpline numbers, and send your complaint draft directly.</p>
+
+        <div class="form-group">
+          <label for="search_location">Search City, PIN Code or Area</label>
+          <div style="display: flex; gap: 12px;">
+            <input type="text" id="search_location" placeholder="e.g. Sector 15 Gurgaon, Connaught Place Delhi, Sohna">
+            <button onclick="searchNearbyPolice()" class="btn" style="width: auto; padding: 0 25px;">Find Stations</button>
+          </div>
+        </div>
+
+        <div id="police-stations-list" class="info-grid"></div>
+
+        <div class="action-box" style="margin-top: 25px;">
+          <div class="action-box-title">📧 Dispatch Complaint Draft via Email / Portal</div>
+          <div class="form-group" style="margin-top: 10px;">
+            <label for="dispatch_email">Station / Official Email Address</label>
+            <input type="text" id="dispatch_email" placeholder="e.g. sho.connaughtplace@delhipolice.gov.in or local cybercell email">
+          </div>
+          <button onclick="dispatchDraftEmail()" class="btn" style="background-color: var(--urgent-red);">Dispatch Complaint Email</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: EMERGENCY NUMBERS HUB -->
+    <div id="contacts-tab" class="tab-content hidden">
+      <div class="card">
+        <h2>Emergency Contacts & National Helplines</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Immediate official contact channels to freeze accounts and lock devices.</p>
+        
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>Cybercrime Fraud Helpline</h3>
+            <p><strong>Call 1930</strong></p>
+            <p>Report financial fraud or unauthorized transaction alerts immediately.</p>
+          </div>
+          <div class="info-card">
+            <h3>CEIR Stolen Mobile Portal</h3>
+            <p><strong>Call 14422</strong></p>
+            <p>National portal to block IMEI across all telecom carriers.</p>
+          </div>
+          <div class="info-card">
+            <h3>National Emergency Helpline</h3>
+            <p><strong>Call 112</strong></p>
+            <p>All-in-one emergency helpline for immediate police response.</p>
+          </div>
+          <div class="info-card">
+            <h3>Card & Banking Hotlines</h3>
+            <p><strong>Call 1800-11-2211</strong></p>
+            <p>General banking dispute and debit/credit card cancellation hotline.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: DIGILOCKER & GOVT PORTALS -->
+    <div id="digilocker-tab" class="tab-content hidden">
+      <div class="card">
+        <h2>DigiLocker & Identity Re-issuance Channels</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Authorized government links to download digital copies or re-issue documents.</p>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>Aadhaar Reprints</h3>
+            <p><a href="https://myaadhaar.uidai.gov.in/" target="_blank">myAadhaar Portal &rarr;</a></p>
+            <p>Download e-Aadhaar or order official PVC replacement cards.</p>
+          </div>
+          <div class="info-card">
+            <h3>Duplicate PAN Application</h3>
+            <p><a href="https://www.onlineservices.nsdl.com/paam/ReprintEPan.html" target="_blank">Protean NSDL Portal &rarr;</a></p>
+            <p>Apply for reprint/duplicate PAN card delivery.</p>
+          </div>
+          <div class="info-card">
+            <h3>Driving Licence Duplicate</h3>
+            <p><a href="https://parivahan.gov.in/" target="_blank">Parivahan Sewa &rarr;</a></p>
+            <p>Upload Loss Certificate and request duplicate DL online.</p>
+          </div>
+          <div class="info-card">
+            <h3>DigiLocker Digital Wallet</h3>
+            <p><a href="https://www.digilocker.gov.in/" target="_blank">DigiLocker Web Portal &rarr;</a></p>
+            <p>Legally valid cloud storage for official government identity documents.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/main.js"></script>
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.remove('hidden');
+      
+      const buttons = document.querySelectorAll('.tab-btn');
+      if(tabId === 'report-tab') buttons[0].classList.add('active');
+      if(tabId === 'tracker-tab') buttons[1].classList.add('active');
+      if(tabId === 'police-tab') buttons[2].classList.add('active');
+      if(tabId === 'contacts-tab') buttons[3].classList.add('active');
+      if(tabId === 'digilocker-tab') buttons[4].classList.add('active');
+    }
+  </script>
+</body>
+</html>

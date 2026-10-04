@@ -1,0 +1,4 @@
+DIGITAL ACCOUNT & MOBILE SECURITY:
+1. Log out of active email sessions (Google Account, Apple ID) remotely using another trusted web browser.
+2. Revoke active login sessions on messaging apps (WhatsApp, Telegram) and social media accounts.
+3. Change passwords for primary email accounts and enable two-factor authentication (2FA) using an authenticator app.
